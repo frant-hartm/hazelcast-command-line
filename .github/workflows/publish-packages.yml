@@ -122,7 +122,7 @@ jobs:
 
       - name: Create & Upload DEB package
         run: |
-        ./build-hazelcast-deb-package.sh
+          ./build-hazelcast-deb-package.sh
 
       - name: Calculate Debian Repository Metadata
         run: |
