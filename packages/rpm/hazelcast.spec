@@ -67,24 +67,13 @@ rm -rf $RPM_BUILD_ROOT
 %post
 chown -R hazelcast:hazelcast %{_prefix}/lib/hazelcast/
 %systemd_post %{name}.service
-printf "\n\nHazelcast is successfully installed to '%{_prefix}/lib/hazelcast/'\n"
-hz --help
+echo "Hazelcast has been successfully installed to '%{_prefix}/lib/hazelcast/'"
 
 %preun
+%systemd_preun %{name}.service
+
+%postun
 %systemd_postun %{name}.service
-
-echo "Removing symlinks from %{_bindir}"
-
-for FILENAME
- in %{_prefix}/lib/hazelcast/bin/hz*; do
-  case "${FILENAME}" in
-    *bat)
-      ;;
-    *)
-      rm %{_bindir}/"$(basename "${FILENAME}")"
-      ;;
-  esac
-done
 
 %files
 # The LICENSE file contains Apache 2 license and is only present in OS
