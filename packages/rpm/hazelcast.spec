@@ -71,10 +71,6 @@ printf "\n\nHazelcast is successfully installed to '%{_prefix}/lib/hazelcast/'\n
 hz --help
 
 %preun
-%systemd_preun %{name}.service
-
-
-%preun
 %systemd_postun %{name}.service
 
 echo "Removing symlinks from %{_bindir}"
